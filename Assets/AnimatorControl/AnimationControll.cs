@@ -70,4 +70,5 @@ public class AnimationControll : MonoBehaviour
         
         Destroy(hadougenInstance, hadougenLifeTime);
     }
+    
 }

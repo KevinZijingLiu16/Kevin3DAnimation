@@ -1,0 +1,110 @@
+# Code Architecture Explanation: Clean C# and SOLID Principles
+
+## Overview
+This document explains the current architecture of the `MovementController` system, why it follows Clean C# practices and SOLID principles, and how it can be easily changed, replaced, tested, and extended.
+
+The system controls a 3D player character in Unity using modular, single-responsibility classes, each defined by an interface for better abstraction and flexibility.
+
+---
+
+## Current Architecture
+
+```
+MovementController.cs        // Main coordinator MonoBehaviour
+├── IInputHandler.cs         // Interface for input handling
+│   └── InputHandler.cs      // New Input System logic
+├── IGravityHandler.cs       // Interface for gravity logic
+│   └── GravityHandler.cs
+├── IMovementHandler.cs      // Interface for player movement
+│   └── MovementHandler.cs   // Uses CharacterController
+├── IRotationHandler.cs      // Interface for character rotation
+│   └── RotationHandler.cs
+└── IAnimationHandler.cs     // Interface for animation control
+    └── AnimationHandler.cs
+```
+
+Each class handles a single task, and the `MovementController` composes them together.
+
+---
+
+## Why It Follows Clean C#
+
+### ✅ Clear Naming & Structure
+- Class and method names are descriptive (e.g., `ApplyGravity`, `UpdateAnimations`).
+- One public class per file.
+- Fields use proper naming conventions.
+
+### ✅ No Magic Numbers
+- Constants like `Gravity = -9.81f` are defined in the gravity handler.
+
+### ✅ DRY Principle (Don’t Repeat Yourself)
+- Reusable logic like animator bool switching is encapsulated.
+
+### ✅ Small, Focused Classes
+- Each file does one thing and does it well, making the code easy to understand.
+
+---
+
+## How It Follows SOLID
+
+### ✅ Single Responsibility Principle (SRP)
+Each class has a single responsibility:
+- `InputHandler` handles only input.
+- `GravityHandler` applies gravity.
+- `MovementHandler` moves the character.
+- `RotationHandler` handles rotation.
+- `AnimationHandler` controls animation states.
+
+### ✅ Open/Closed Principle (OCP)
+- You can add new features like dashing or jumping by creating new handlers without modifying existing ones.
+
+### ✅ Liskov Substitution Principle (LSP)
+- All handler classes can be replaced with different implementations of the same interface without breaking functionality.
+
+### ✅ Interface Segregation Principle (ISP)
+- Each interface (`IInputHandler`, `IAnimationHandler`, etc.) is focused and lightweight.
+
+### ✅ Dependency Inversion Principle (DIP)
+- `MovementController` depends on abstractions (interfaces), not concrete implementations.
+
+---
+
+## How to Modify, Replace, Test, and Extend
+
+### 🔁 Modify
+Want to change how gravity works?
+- Create a new class `CustomGravityHandler` implementing `IGravityHandler`.
+- Replace the existing gravity handler in `MovementController` with the new one.
+
+```csharp
+IGravityHandler gravityHandler = new CustomGravityHandler();
+```
+
+### 🔄 Replace
+Want to switch to a different input system or use AI?
+- Create `AIInputHandler : IInputHandler`
+- Replace `InputHandler` with `AIInputHandler`
+
+### 🧪 Test
+Each component is testable independently:
+- Unit test `AnimationHandler` by mocking `Animator`.
+- Test `RotationHandler` with dummy `Transform`.
+
+### ➕ Extend
+Want to add a jump system?
+1. Create `IJumpHandler`
+2. Create `JumpHandler` class implementing it
+3. Inject and call it from `MovementController`
+
+```csharp
+IJumpHandler jumpHandler = new JumpHandler();
+jumpHandler.HandleJump();
+```
+
+---
+
+## Conclusion
+This architecture ensures high cohesion and low coupling. It's easy to maintain, scale, and adapt. You can change or add systems without breaking others, making it ideal for growing projects.
+
+If you'd like a diagram, sample unit tests, or additional features (e.g. dash, crouch), feel free to request!
+

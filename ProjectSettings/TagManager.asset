@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Ragdoll
   layers:
   - Default
   - TransparentFX
@@ -11,14 +12,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - PostProcessing
   - 
   - FirstPersonWeapon
   - PhysicalAmmo
-  - 
-  - 
+  - Player
+  - Ragdoll
   - 
   - 
   - 
