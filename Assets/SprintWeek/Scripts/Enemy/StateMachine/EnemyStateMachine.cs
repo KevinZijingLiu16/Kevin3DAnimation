@@ -13,16 +13,21 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float DetectPlayerRange { get; private set; }
     [field: SerializeField] public float AttackRange { get; private set; }
-  
+    [field: SerializeField] public PerceptionComponent perceptionComponent { get; private set; }
+    [field: SerializeField] public Transform[] PatrolPoints { get; private set; }
+    [field: SerializeField] public Transform HeadTransform { get; private set; }
+
+    private bool canSeePlayer;
+
 
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        SwitchState(new EnemyIdleState(this));
+        SwitchState(new EnemyPatrolState(this));
 
         Agent.updatePosition = false;
         Agent.updateRotation = false;
-
+        perceptionComponent.onPerceptionTargetChanged += HandlePerceptionTargetChanged;
     }
 
     private void OnDrawGizmosSelected()
@@ -38,6 +43,7 @@ public class EnemyStateMachine : StateMachine
     private void OnDisable()
     {
         GrabTrigger.OnPlayerGrabbed -= HandlePlayerGrabbed;
+        perceptionComponent.onPerceptionTargetChanged -= HandlePerceptionTargetChanged;
     }
     private void HandlePlayerGrabbed()
     {
@@ -51,4 +57,17 @@ public class EnemyStateMachine : StateMachine
         
         SwitchState(new EnemyFrozenState(this));
     }
+    public bool CanSensePlayer()
+    {
+        return canSeePlayer;
+    }
+    private void HandlePerceptionTargetChanged(GameObject target, bool sensed)
+    {
+        if (target == Player)
+        {
+            canSeePlayer = sensed;
+        }
+    }
+
+
 }
