@@ -68,6 +68,13 @@ public class EnemyStateMachine : StateMachine
             canSeePlayer = sensed;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ink"))
+        {
+            SwitchState(new EnemyRagdollState(this));
+        }
+    }
 
 
 }
