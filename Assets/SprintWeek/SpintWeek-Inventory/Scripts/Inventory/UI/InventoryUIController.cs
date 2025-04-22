@@ -149,7 +149,7 @@ namespace Inventory.UI
 
             for (int i = 0; i < quantity; i++)
             {
-                Vector3 dropPosition = playerTransform.position + playerTransform.forward * 2f;
+                Vector3 dropPosition = playerTransform.position + playerTransform.forward * -3f;
 
                 dropPosition.y = 1f + i * 0.2f; 
                 dropPosition.x += Random.Range(-0.5f, 0.5f);

@@ -18,6 +18,7 @@ public class EnemyRagdollState : EnemyBaseState
     {
         ragdoll.ToggleRagdoll(true);
         stateMachine.StartCoroutine(RecoverFromRagdoll());
+
     }
 
     private IEnumerator RecoverFromRagdoll()
@@ -29,7 +30,10 @@ public class EnemyRagdollState : EnemyBaseState
         stateMachine.SwitchState(new EnemyIdleState(stateMachine));
     }
 
-    public override void Tick(float deltaTime) { }
+    public override void Tick(float deltaTime) 
+    {
+     
+    }
 
     public override void Exit() { }
 }

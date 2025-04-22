@@ -18,7 +18,7 @@ public class EnemyPatrolState : EnemyBaseState
 
     public override void Enter()
     {
-        stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, CrossFadeDuration);
+       stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, CrossFadeDuration);
         MoveToCurrentPoint();
     }
 
@@ -65,6 +65,8 @@ public class EnemyPatrolState : EnemyBaseState
         stateMachine.Animator.SetFloat(SpeedHash, currentVelocity.magnitude > 0.1f ? 0.5f : 0f, dampTime, deltaTime);
 
         stateMachine.Agent.nextPosition = stateMachine.transform.position;
+
+        stateMachine.sightVisulizer.gameObject.SetActive(true);
     }
 
     public override void Exit()

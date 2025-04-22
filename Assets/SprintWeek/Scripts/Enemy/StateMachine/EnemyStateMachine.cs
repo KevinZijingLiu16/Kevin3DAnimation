@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,10 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float AttackRange { get; private set; }
     [field: SerializeField] public PerceptionComponent perceptionComponent { get; private set; }
     [field: SerializeField] public Transform[] PatrolPoints { get; private set; }
-    [field: SerializeField] public Transform HeadTransform { get; private set; }
+    [field: SerializeField] public GameObject sightVisulizer { get; private set; }
+
+
+
 
     private bool canSeePlayer;
 
@@ -28,6 +32,7 @@ public class EnemyStateMachine : StateMachine
         Agent.updatePosition = false;
         Agent.updateRotation = false;
         perceptionComponent.onPerceptionTargetChanged += HandlePerceptionTargetChanged;
+        sightVisulizer.gameObject.SetActive(true);
     }
 
     private void OnDrawGizmosSelected()
@@ -68,6 +73,11 @@ public class EnemyStateMachine : StateMachine
             canSeePlayer = sensed;
         }
     }
+    public void ClearPerception()
+    {
+        canSeePlayer = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ink"))

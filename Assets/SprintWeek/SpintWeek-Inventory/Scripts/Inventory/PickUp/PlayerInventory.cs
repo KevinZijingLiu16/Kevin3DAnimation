@@ -1,6 +1,7 @@
 using Inventory.Data;
 using Inventory.Model;
 using Inventory.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Inventory.Player
@@ -32,5 +33,20 @@ namespace Inventory.Player
             }
             return added;
         }
+        public List<InventoryItemStack> GetAllItems()
+        {
+            List<InventoryItemStack> all = new List<InventoryItemStack>();
+            foreach (var slot in _model.Slots)
+            {
+                if (!slot.IsEmpty)
+                {
+                    all.Add(slot.ItemStack);
+                }
+            }
+            return all;
+        }
+
+
+
     }
 }

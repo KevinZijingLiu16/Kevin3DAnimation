@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class WeaponDamage : MonoBehaviour
 {
     [SerializeField] private Collider myCollider;
+    public static event Action<Collider, GameObject> OnAnyHitEnemy;
+    private GameObject attacker;
 
     //private int damage;
     [SerializeField ]private float knockback;
@@ -14,7 +17,10 @@ public class WeaponDamage : MonoBehaviour
     {
         alreadyCollidedWith.Clear();
     }
-
+    public void SetAttacker(GameObject attacker)
+    {
+        this.attacker = attacker;
+    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +46,7 @@ public class WeaponDamage : MonoBehaviour
         {
             Vector3 direction = (other.transform.position - myCollider.transform.position).normalized+ Vector3.up * 0.2f;
             forceReceiver.AddForce(direction * knockback);
+            OnAnyHitEnemy?.Invoke(other, attacker);
         }
     }
 

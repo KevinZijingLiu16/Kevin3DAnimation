@@ -11,7 +11,7 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void Enter()
     {
-        stateMachine.Animator.CrossFadeInFixedTime(attackHash, CrossFadeDuration);
+      stateMachine.Animator.CrossFadeInFixedTime(attackHash, CrossFadeDuration);
     }
     public override void Tick(float deltaTime)
     {
@@ -21,8 +21,8 @@ public class EnemyAttackState : EnemyBaseState
             return;
         }
         FacePlayer();
-   
-       
+
+        stateMachine.sightVisulizer.gameObject.SetActive(false);
     }
 
     public override void Exit()

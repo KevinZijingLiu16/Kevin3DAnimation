@@ -8,8 +8,8 @@ public abstract class SenseComponent : MonoBehaviour
     [SerializeField] float forgettingTime = 3f;
     //static is used to make the list of stimuli shared across all instances of the class
     static List<PerceptionStimuli> registeredStimuli = new List<PerceptionStimuli>();
-    List<PerceptionStimuli> perceivableStimuli = new List<PerceptionStimuli>();
-    Dictionary<PerceptionStimuli, Coroutine> ForgettingRoutines = new Dictionary<PerceptionStimuli, Coroutine>();
+    protected List<PerceptionStimuli> perceivableStimuli = new List<PerceptionStimuli>();
+    protected Dictionary<PerceptionStimuli, Coroutine> ForgettingRoutines = new Dictionary<PerceptionStimuli, Coroutine>();
 
     public delegate void OnPerceptionUpdated(PerceptionStimuli stimuli, bool successfullySensed);
     public event OnPerceptionUpdated OnPerceptionUpdatedEvent;
@@ -69,12 +69,17 @@ public abstract class SenseComponent : MonoBehaviour
     {
         DrawDebug();
     }
-    IEnumerator ForgetStimuli(PerceptionStimuli stimuli)
+   protected IEnumerator ForgetStimuli(PerceptionStimuli stimuli)
     {
         yield return new WaitForSeconds(forgettingTime);
         ForgettingRoutines.Remove(stimuli);
         OnPerceptionUpdatedEvent?.Invoke(stimuli, false);
        Debug.Log("I have forgotten " + stimuli.gameObject);
     }
+    protected void NotifyStimuliSensed(PerceptionStimuli stimuli, bool sensed)
+    {
+        OnPerceptionUpdatedEvent?.Invoke(stimuli, sensed);
+    }
+
 }
 
