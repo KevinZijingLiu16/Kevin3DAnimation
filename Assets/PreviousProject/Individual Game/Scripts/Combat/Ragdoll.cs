@@ -42,6 +42,11 @@ public class Ragdoll : MonoBehaviour
 
         controller.enabled = !isRagdoll;
         animator.enabled = !isRagdoll;
+        if (MovementController == null)
+        {
+          
+            return;
+        }
         MovementController.enabled = !isRagdoll;
 
     }

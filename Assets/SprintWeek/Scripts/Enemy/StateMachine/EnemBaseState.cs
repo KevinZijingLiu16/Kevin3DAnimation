@@ -8,14 +8,21 @@ public abstract class EnemyBaseState : State
     {
         this.stateMachine = stateMachine;
     }
+    //protected bool IsInChaseRange()
+    //{
+    //    Vector3 toPlayer = stateMachine.Player.transform.position - stateMachine.transform.position;
+
+    //    float playerDistanceSquared = toPlayer.sqrMagnitude;
+
+    //    return playerDistanceSquared <= stateMachine.DetectPlayerRange * stateMachine.DetectPlayerRange;
+    //}
+
     protected bool IsInChaseRange()
     {
-       Vector3 toPlayer = stateMachine.Player.transform.position - stateMachine.transform.position;
-
-        float playerDistanceSquared = toPlayer.sqrMagnitude;
-
-        return playerDistanceSquared <= stateMachine.DetectPlayerRange * stateMachine.DetectPlayerRange;
+        return stateMachine.CanSensePlayer();
     }
+
+
     //Method overloding Move()
     //First one is for when we do not want to pass the direction (motion), then it is Vector3.zero. Which means we are not subject to any motion except force from other sources.For example, when we are in idle state, we do not want to move the character controller, but we want to apply the force from other sources like gravity or pushing from player's attack. So we pass Vector3.zero as the motion vector.
     protected void Move(float deltaTime)

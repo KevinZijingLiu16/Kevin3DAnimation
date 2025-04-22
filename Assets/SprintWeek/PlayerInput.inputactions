@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InkAttack",
+                    "type": "Button",
+                    "id": "fdc0c862-1ff6-4599-87de-bfe789ea3e5f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -112,7 +121,7 @@
                 {
                     "name": "",
                     "id": "366a1f1b-2518-4772-a98e-dd4589d23843",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hadougen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1525972-fc8f-4313-8e7d-1e0b53c6c8d9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InkAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

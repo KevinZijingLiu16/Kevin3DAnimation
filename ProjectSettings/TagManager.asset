@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ragdoll
+  - Ink
   layers:
   - Default
   - TransparentFX

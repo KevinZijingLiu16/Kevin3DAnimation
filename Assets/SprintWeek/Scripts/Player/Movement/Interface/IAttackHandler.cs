@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public interface IAttackHandler 
+public interface IAttackHandler
 {
-    void Attack();
+    void Hadougen();
+    void Ink();
 }

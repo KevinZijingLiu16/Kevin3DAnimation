@@ -15,6 +15,7 @@ public class EnemyChasingState : EnemyBaseState
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, CrossFadeDuration);
+   
 
     }
 
@@ -25,7 +26,8 @@ public class EnemyChasingState : EnemyBaseState
 
         if (!IsInChaseRange())
         {
-            stateMachine.SwitchState(new EnemyIdleState(stateMachine));
+            stateMachine.ClearPerception();
+            stateMachine.SwitchState(new EnemyIdleState(stateMachine,true));
             Debug.Log("Enemy in Idle State");
             return;
         }
@@ -40,6 +42,7 @@ public class EnemyChasingState : EnemyBaseState
 
 
         stateMachine.Animator.SetFloat(SpeedHash, 1f, dampTime, deltaTime);
+        stateMachine.sightVisulizer.gameObject.SetActive(false);
     }
 
    

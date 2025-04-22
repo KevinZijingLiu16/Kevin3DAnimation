@@ -6,6 +6,7 @@ public class AnimationHandler : IAnimationHandler
     private readonly int isWalkingHash = Animator.StringToHash("IsWalking");
     private readonly int isRunningHash = Animator.StringToHash("IsRunning");
     private readonly int hadougenHash = Animator.StringToHash("Hadougen");
+    private readonly int isInkAttackHash = Animator.StringToHash("Ink");
 
     public AnimationHandler(Animator animator)
     {
@@ -26,6 +27,11 @@ public class AnimationHandler : IAnimationHandler
     public void PlayHadougen()
     {
         animator.SetTrigger(hadougenHash);
+
+    }
+    public void PlayInkAttack()
+    {
+        animator.SetTrigger(isInkAttackHash);
     }
 
 }

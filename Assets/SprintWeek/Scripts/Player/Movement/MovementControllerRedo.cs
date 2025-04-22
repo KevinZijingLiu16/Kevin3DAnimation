@@ -12,7 +12,7 @@ public class MovementControllerRedo : MonoBehaviour
     private IMovementHandler movementHandler;
     private IRotationHandler rotationHandler;
     private IAnimationHandler animationHandler;
-    private IAttackHandler attackHandler;
+    
 
     private Vector3 movementVector;
     private CharacterController controller;
@@ -22,7 +22,7 @@ public class MovementControllerRedo : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        attackHandler = GetComponent<IAttackHandler>();
+      
 
         inputHandler = new InputHandler();
         gravityHandler = new GravityHandler();
@@ -53,6 +53,11 @@ public class MovementControllerRedo : MonoBehaviour
         {
             animationHandler.PlayHadougen();
             
+        }
+        if (inputHandler.IsInkAttackPressed)
+        {
+            animationHandler.PlayInkAttack();
+           
         }
     }
 }

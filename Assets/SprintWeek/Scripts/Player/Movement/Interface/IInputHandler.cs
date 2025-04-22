@@ -6,6 +6,7 @@ public interface IInputHandler
     bool IsMovementPressed { get; }
     bool IsRunPressed { get; }
     bool IsHadougenPressed { get; }
+    bool IsInkAttackPressed { get; }
 
     void Enable();
     void Disable();

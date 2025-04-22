@@ -12,6 +12,7 @@ public class EnemyFrozenState : EnemyBaseState
 
     public override void Enter()
     {
+        
         // Play idle animation (can use Locomotion with Speed 0)
         stateMachine.Animator.CrossFadeInFixedTime(FlairHash, CrossFadeDuration);
        
@@ -24,6 +25,7 @@ public class EnemyFrozenState : EnemyBaseState
     public override void Tick(float deltaTime)
     {
         // Do nothing, stay frozen
+        stateMachine.sightVisulizer.gameObject.SetActive(false);
     }
 
     public override void Exit()

@@ -8,6 +8,7 @@ public class InputHandler : IInputHandler
     public bool IsMovementPressed => MovementInput != Vector2.zero;
     public bool IsRunPressed { get; private set; }
     public bool IsHadougenPressed { get; private set; }
+    public bool IsInkAttackPressed { get; private set; }
 
     public InputHandler()
     {
@@ -21,6 +22,9 @@ public class InputHandler : IInputHandler
 
         playerInput.CharacterControl.Hadougen.performed += ctx => IsHadougenPressed = ctx.ReadValueAsButton();
         playerInput.CharacterControl.Hadougen.canceled += ctx => IsHadougenPressed = false;
+
+        playerInput.CharacterControl.InkAttack.performed += ctx => IsInkAttackPressed = ctx.ReadValueAsButton();
+        playerInput.CharacterControl.InkAttack.canceled += ctx => IsInkAttackPressed = false;
     }
 
     public void Enable() => playerInput.Enable();

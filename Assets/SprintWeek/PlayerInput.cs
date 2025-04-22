@@ -62,6 +62,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InkAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""fdc0c862-1ff6-4599-87de-bfe789ea3e5f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,7 +143,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""366a1f1b-2518-4772-a98e-dd4589d23843"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -152,6 +161,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Hadougen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1525972-fc8f-4313-8e7d-1e0b53c6c8d9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InkAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_CharacterControl_Run = m_CharacterControl.FindAction("Run", throwIfNotFound: true);
         m_CharacterControl_ToggleInventory = m_CharacterControl.FindAction("ToggleInventory", throwIfNotFound: true);
         m_CharacterControl_Hadougen = m_CharacterControl.FindAction("Hadougen", throwIfNotFound: true);
+        m_CharacterControl_InkAttack = m_CharacterControl.FindAction("InkAttack", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -234,6 +255,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_Run;
     private readonly InputAction m_CharacterControl_ToggleInventory;
     private readonly InputAction m_CharacterControl_Hadougen;
+    private readonly InputAction m_CharacterControl_InkAttack;
     public struct CharacterControlActions
     {
         private @PlayerInput m_Wrapper;
@@ -242,6 +264,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_CharacterControl_Run;
         public InputAction @ToggleInventory => m_Wrapper.m_CharacterControl_ToggleInventory;
         public InputAction @Hadougen => m_Wrapper.m_CharacterControl_Hadougen;
+        public InputAction @InkAttack => m_Wrapper.m_CharacterControl_InkAttack;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +286,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Hadougen.started += instance.OnHadougen;
             @Hadougen.performed += instance.OnHadougen;
             @Hadougen.canceled += instance.OnHadougen;
+            @InkAttack.started += instance.OnInkAttack;
+            @InkAttack.performed += instance.OnInkAttack;
+            @InkAttack.canceled += instance.OnInkAttack;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -279,6 +305,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Hadougen.started -= instance.OnHadougen;
             @Hadougen.performed -= instance.OnHadougen;
             @Hadougen.canceled -= instance.OnHadougen;
+            @InkAttack.started -= instance.OnInkAttack;
+            @InkAttack.performed -= instance.OnInkAttack;
+            @InkAttack.canceled -= instance.OnInkAttack;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -302,5 +331,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
         void OnHadougen(InputAction.CallbackContext context);
+        void OnInkAttack(InputAction.CallbackContext context);
     }
 }
