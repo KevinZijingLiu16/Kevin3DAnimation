@@ -98,7 +98,7 @@ public class GameUIManager : MonoBehaviour
     public void ShowVictory(float finishTime)
     {
         victoryPanel.SetActive(true);
-        victoryTimeText.text = $"You escaped in {finishTime:F1} seconds!";
+        victoryTimeText.text = $"You still have {finishTime:F1} seconds!";
     }
 
     
