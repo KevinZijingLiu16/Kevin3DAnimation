@@ -33,6 +33,7 @@ namespace Inventory.Player
             }
             return added;
         }
+        //PlayerInventory.GetAllItems is used to get all the items in the inventory, for the game manager to use
         public List<InventoryItemStack> GetAllItems()
         {
             List<InventoryItemStack> all = new List<InventoryItemStack>();

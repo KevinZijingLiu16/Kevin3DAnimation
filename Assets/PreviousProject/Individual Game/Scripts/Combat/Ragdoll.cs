@@ -8,6 +8,7 @@ public class Ragdoll : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterController controller;
     [SerializeField] private MovementControllerRedo MovementController;
+    [SerializeField] private bool isRagdoll = false;
 
     private Collider[] allColliders;
     private Rigidbody[] allRigidbodies;

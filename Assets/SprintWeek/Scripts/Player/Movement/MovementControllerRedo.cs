@@ -3,9 +3,9 @@ using UnityEngine;
 public class MovementControllerRedo : MonoBehaviour
 {
     [Header("Settings")]
-    public float moveSpeed = 5f;
-    public float runMultiplier = 3f;
-    public float rotationSpeed = 10f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float runMultiplier = 3f;
+    [SerializeField] private float rotationSpeed = 10f;
 
     private IInputHandler inputHandler;
     private IGravityHandler gravityHandler;
@@ -25,7 +25,7 @@ public class MovementControllerRedo : MonoBehaviour
       
 
         inputHandler = new InputHandler();
-        gravityHandler = new GravityHandler();
+        gravityHandler = new GravityHandler(); 
         movementHandler = new MovementHandler(controller, moveSpeed, runMultiplier);
         rotationHandler = new RotationHandler(transform, rotationSpeed);
         animationHandler = new AnimationHandler(animator);

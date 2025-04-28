@@ -7,8 +7,6 @@ namespace Inventory.Model
         // The index of the slot in the inventory, easy to track the item position
         public int Index { get; private set; }
         //The actual content of the slot
-        // if not null, it means that the slot is occupied by an item stack
-        // if null, it means that the slot is empty
         public InventoryItemStack ItemStack { get; private set; }
         // Property to check if the slot is empty
         public bool IsEmpty => ItemStack == null || ItemStack.Quantity <= 0;
